@@ -1,0 +1,16 @@
+{
+    "port": 8080,
+    "bodyLimit": "100kb",
+    "corsHeaders": ["Link"],
+    "logDir": "/tmp/modata/",
+    "logRotateDateFormat": "yyyy-MM-dd",
+
+    "mongo": {
+        "options": {
+            "db": {
+                "safe": true
+            }
+        },
+        "uri": "mongodb://localhost/tlights"
+    }
+}
