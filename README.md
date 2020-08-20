@@ -1,7 +1,7 @@
 Express & MongoDB based test REST API's
 ==================================
 
-This is a straightforward boilerplate code using Express, NodeJS and mongoDB
+This is a straightforward boilerplate code using Express, NodeJS and mongoDB. 
 MongoDB needs to be setup independently as docker support is still not added
 
 
@@ -23,7 +23,7 @@ npm install
 PORT=8080 npm run dev
 
 ```
-Docker Support (Fails without running mongoDB instance )
+Docker Support (Fails without a running mongoDB instance )
 ------
 ```sh
 cd test-code
@@ -80,9 +80,9 @@ MongoDB data structure and records:
 { "_id" : ObjectId("5f3e6d7bef2bbc7a88880f1d"), "lightId" : "3", "newState" : "1", "tStamp" : 1597926779306, "meta" : { "currState" : { "0" : 0, "1" : 1, "2" : 0, "3" : 0 } }, "__v" : 0 }
 
 Test to find light signal inconsistencies:
+NOTE: Early entries will not have the invalidState identified as we will not have data for all 4 directions in the beginning 
 
 curl --header "Content-Type: application/json"   --request POST   --data '{ "query" : {"type" : "malfunction" , "startTime" : "2020-01-30", "endTime" : "2020-09-10"} }'   http://localhost:8080/api/lightstates/logs/search
-
 {
    "north":[
       {
