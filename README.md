@@ -64,10 +64,11 @@ curl --header "Content-Type: application/json"   --request POST   --data '{ "lig
 
 curl --header "Content-Type: application/json"   --request POST   --data '{ "lightId" : "west", "newState" : "green" }'   http://localhost:8080/api/lightstates/logs/
 {"_id":"5f3e6d7bef2bbc7a88880f1d","lightId":"3","newState":"1","tStamp":1597926779306,"meta":{"currState":{"0":0,"1":1,"2":0,"3":0}},"__v":0,"id":"5f3e6d7bef2bbc7a88880f1d"}
-
-
+```
 
 MongoDB data structure and records:
+-------
+```sh
 
 > db.lightstates.find()
 { "_id" : ObjectId("5f3e6cfbef2bbc7a88880f16"), "lightId" : "2", "newState" : "1", "tStamp" : 1597926651075, "__v" : 0 }
@@ -78,9 +79,14 @@ MongoDB data structure and records:
 { "_id" : ObjectId("5f3e6d5aef2bbc7a88880f1b"), "lightId" : "2", "newState" : "0", "tStamp" : 1597926746983, "meta" : { "currState" : { "0" : 0, "1" : 0, "2" : 1, "3" : 0 } }, "__v" : 0 }
 { "_id" : ObjectId("5f3e6d6eef2bbc7a88880f1c"), "lightId" : "1", "newState" : "1", "tStamp" : 1597926766223, "meta" : { "currState" : { "0" : 0, "1" : 0, "2" : 0, "3" : 0 } }, "__v" : 0 }
 { "_id" : ObjectId("5f3e6d7bef2bbc7a88880f1d"), "lightId" : "3", "newState" : "1", "tStamp" : 1597926779306, "meta" : { "currState" : { "0" : 0, "1" : 1, "2" : 0, "3" : 0 } }, "__v" : 0 }
+```
 
 Test to find light signal inconsistencies:
-NOTE: Early entries will not have the invalidState identified as we will not have data for all 4 directions in the beginning 
+-------
+```sh
+Observations: 
+1) Early entries will not have invalidState attribute identified as we will not have data for all 4 directions in the beginning 
+2) Last timeslot entry for "west" will show open inconsistency (no endTime) since the last log added to west signal with opposing state of east '{ "lightId" : "west", "newState" : "green" }'
 
 curl --header "Content-Type: application/json"   --request POST   --data '{ "query" : {"type" : "malfunction" , "startTime" : "2020-01-30", "endTime" : "2020-09-10"} }'   http://localhost:8080/api/lightstates/logs/search
 {
