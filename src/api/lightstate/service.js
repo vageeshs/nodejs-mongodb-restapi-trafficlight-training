@@ -20,7 +20,6 @@ module.exports = class LightStateService extends __.baseService {
         json.lightId = __._.findIndex(validLights, o => o === lId)
 
         const lastLg = await this.model.find().sort({ tStamp: -1 }).limit(1) || {}
-        console.log("lastLog : ", __.jStr(lastLg))
         if (!__._.isEmpty(lastLg)) {
             __._.set(json, 'meta.currState', __._.get(lastLg[0], 'meta.currState', {}));
             json.meta.currState[__._.parseInt(lastLg[0].lightId)] = __._.parseInt(lastLg[0].newState);

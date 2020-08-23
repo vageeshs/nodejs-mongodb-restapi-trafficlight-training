@@ -26,6 +26,7 @@ module.exports = class BaseService {
     }
 
     create(json) {
+        json = __._.isString(json) ? JSON.parse(json) : json;
         return this._create(json)
     }
 
