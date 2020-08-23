@@ -11,7 +11,7 @@ Getting Started
 
 ```sh
 # clone it
-git clone https://vageesh@bitbucket.org/vageesh/test-api.git
+git clone https://github.com/vageeshs/nodejs-mongodb-restapi-trafficlight-training.git
 cd test-code
 
 npm init
